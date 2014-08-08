@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello world</title>
+</head>
+<body>
+  <pre>
+    <code contenteditable>
+Hellow world
+    </code>
+  </pre>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+    var socket = io();
+    var editable = document.getElementsByTagName('code')[0];
+
+    editable.addEventListener('keyup', function(){
+      socket.emit('edit', editable.innerHTML);
+    });
+
+    socket.on('edit', function(data){
+      editable.innerHTML = data;
+    });
+  </script>
+</body>
+</html>
